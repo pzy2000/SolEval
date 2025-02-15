@@ -23,6 +23,15 @@ cd Anonymous
 pip install -r requirements.txt
 ```
 
+Before running the evaluation, researchers need to download the repositories, and dependency data.
+
+### Repositories
+
+The original repositories can be downloaded from [link](https://anonymous.4open.science/r/SolEval-1C06/repository.zip). Users need to uncompressed the repositories and put them in the root directory (i.e., `SolEval/repository`).
+
+The project are stored in `repository`. `repository` contains 9 subfolders, each of which corresponds to a GitHub project. Please do not modify the file structure of the repositories. Otherwise, the evaluation script can not work properly.
+
+
 ## Precheck
 
 Before running the evaluation, ensure that you have installed the following tools:
