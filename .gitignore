@@ -1,0 +1,16 @@
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/SolParser.iml
+/.idea/vcs.xml
+/logs/
+/rubbish_bin/
+/patch/
+/results/
+/logs_filter/
+/logs_patch/
+/logs_slither/
+/logs_gas/
+/clean_data.py
