@@ -184,7 +184,7 @@ if __name__ == '__main__':
                     if analysis.get("error"):
                         print(f"Analyze fail: {analysis['message']}")
                     else:
-                        print("Analyze success！")
+                        print("Analyze success!")
                         print(f"Use compiler: {analysis['compiler_version']}")
                     with open(f"{file_path}", 'w') as f:
                         f.write(source_bk)
