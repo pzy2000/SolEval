@@ -5,6 +5,7 @@ from tqdm import tqdm
 from tools.utils.logger import MyLogger
 from tools.utils.replacements import update_id
 
+
 if __name__ == '__main__':
     with open('results_with_context_tdd_repo.json', 'r') as file:
         data = json.load(file)

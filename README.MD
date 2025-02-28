@@ -100,6 +100,25 @@ The arguments are explained as follows.
 - `sample`: the number of generated programs per requirement.
 - `rag`: whether to use RAG or not.
 
+
+### Running Gas Analysis with forge
+
+You can run gas analysis using forge with the `tools/run_gas.py` script. First, you need to put all the `results_*.jsonl` in the `results/gas` folder. Then, you can run the following command SEQUENTIALLY:
+
+```bash
+python tools/utils/intersect_gas.py
+python tools/run_gas.py --context y --model OpenCode --sample 10 --rag true --shot 1
+#python tools/run_gas.py --context y --model DeepSeek-Coder-33B --sample 10 --rag true --shot 1
+#python tools/run_gas.py --context y --model CodeLlama-34B --sample 10 --rag true --shot 1
+```
+
+The arguments are explained as follows.
+- `context`: y or n, whether to use context or not.
+- `model`: the LLM used for generating the contracts.
+- `shot`: the number of shots.
+- `sample`: the number of generated programs per requirement.
+- `rag`: whether to use RAG or not.
+
 ## Contributing
 
 We welcome contributions to SolEval. To contribute:

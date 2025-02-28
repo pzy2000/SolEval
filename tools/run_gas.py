@@ -9,7 +9,7 @@ from tqdm import tqdm
 from utils.logger import MyLogger
 
 if __name__ == '__main__':
-    GROUND_TRUTH_filename = '../rubbish_bin/GROUND_TRUTH.jsonl'
+    GROUND_TRUTH_filename = '../data/GROUND_TRUTH.jsonl'
     with open(GROUND_TRUTH_filename, 'r') as file:
         ground_truth = json.load(file)
     result_folder = "results/gas"

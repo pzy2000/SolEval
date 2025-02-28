@@ -6,7 +6,7 @@ from pprint import pprint
 result_folder = "results/gas"
 jsonl_files = [os.path.join(result_folder, f) for f in os.listdir(result_folder) if f.endswith('.jsonl')]
 pprint(jsonl_files)
-GROUND_TRUTH_filename = 'GROUND_TRUTH.jsonl'
+GROUND_TRUTH_filename = '../../data/GROUND_TRUTH.jsonl'
 
 
 with open(GROUND_TRUTH_filename, 'r') as f:

@@ -124,10 +124,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     set_seed(args.seed)
     embedding_list, original_document_list, func_list = init_bert_model()
-    # torch.cuda.empty_cache()
-
-    # with open('prompt_template.txt', 'r', encoding='utf-8') as file:
-        # prompt_template = file.read()
     log_file = f"log_{args.model}_shot_{args.shot}_context_{args.context}_testcase_{args.testcase}_{current_time}.txt"
     logger = MyLogger(f"logs_patch/{log_file}")
     if args.model == "DeepSeek-Coder-34B":
