@@ -18,8 +18,6 @@
 To install SolEval, clone this repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/Anonymous/Anonymous.git
-cd Anonymous
 pip install -r requirements.txt
 ```
 
