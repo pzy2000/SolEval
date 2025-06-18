@@ -137,7 +137,7 @@ SolEval is licensed under the MIT License. See the [LICENSE](LICENSE) file for m
 
 ## Acknowledgements
 
-SolEval is developed as part of our submission for ACL2025.
+SolEval is developed as part of our submission for EMNLP2025.
 
 We acknowledge the contributions of the open-source community and the developers of the tools integrated into SolEval.
 
