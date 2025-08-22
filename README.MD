@@ -1,72 +1,106 @@
-# SolEval: Benchmarking Large Language Models for Repository-level Solidity Smart Contract Generation
+# [EMNLP 2025 Main] SolEval: Benchmarking Large Language Models for Repository-Aware Solidity Smart Contract Generation
 
-**SolEval** is an evaluation framework designed to benchmark Large Language Models (LLMs) for generating Solidity smart contracts at the repository level.
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-[//]: # (## Features)
+[contributors-shield]: https://img.shields.io/github/contributors/pzy2000/SolEval.svg?style=for-the-badge
+[contributors-url]: https://github.com/pzy2000/SolEval/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/pzy2000/SolEval.svg?style=for-the-badge
+[forks-url]: https://github.com/pzy2000/SolEval/network/members
+[stars-shield]: https://img.shields.io/github/stars/pzy2000/SolEval.svg?style=for-the-badge
+[stars-url]: https://github.com/pzy2000/SolEval/stargazers
+[issues-shield]: https://img.shields.io/github/issues/pzy2000/SolEval.svg?style=for-the-badge
+[issues-url]: https://github.com/pzy2000/SolEval/issues
+[license-shield]: https://img.shields.io/github/license/pzy2000/SolEval.svg?style=for-the-badge&label=License
+[license-url]: https://github.com/pzy2000/SolEval/blob/main/LICENSE
 
-[//]: # ()
-[//]: # (- **Automated Smart Contract Generation**)
+📄 Paper: [https://arxiv.org/abs/2502.18793](https://arxiv.org/abs/2502.18793) <!-- Replace when available -->
 
-[//]: # (- **Repository-Level Evaluation**)
+🏆 Leaderboard: Coming soon
 
-[//]: # (- **Security Vulnerability Detection**)
+📫 Contact: [Zhiyuan Peng](mailto:pzy2000@sjtu.edu.cn), [Xin Yin](mailto:xyin@zju.edu.cn)
 
-[//]: # (- **Test Execution**)
+# 📰 News
+
+* \<2025/02> 🚀 SolEval repository open-sourced.
+* \<2025/08> 🎉 SolEval accepted to EMNLP 2025 Main Conference.
+<!-- * \<2025/MM/DD> 🚀 SolEval leaderboard online. -->
+
+# 🚀 Quickstart
+
+## Requirements
+
+* **Operating System**: Linux / Windows (macOS not thoroughly tested but likely works).
+* **Python**: 3.8+ (3.10/3.11 recommended).
+* **Solidity toolchain**: Foundry (**forge**) and `solc` (use `solc-select` to manage versions).
+* **Security analyzer**: **Slither** (Python 3.8+).
+* *(Optional)* **LLMs**: GPT-4o, DeepSeek, Qwen, CodeLlama, OpenCode, etc.
 
 ## Installation
 
-To install SolEval, clone this repository and install the required dependencies:
-
 ```bash
+git clone https://github.com/pzy2000/SolEval.git
+cd SolEval
 pip install -r requirements.txt
 ```
 
-Before running the evaluation, researchers need to download the repositories, and dependency data.
+Before running evaluations, prepare repository data and dependency metadata.
 
 ### Repositories
 
-The original repositories can be downloaded from [link](https://anonymous.4open.science/r/SolEval-1C06/repository.zip). Users need to uncompressed the repositories and put them in the root directory (i.e., `SolEval/repository`).
+Download the original repositories and extract them under the project root:
 
-The project are stored in `repository`. `repository` contains 9 subfolders, each of which corresponds to a GitHub project. Please do not modify the file structure of the repositories. Otherwise, the evaluation script can not work properly.
+* Download: [repository.zip](https://media.githubusercontent.com/media/pzy2000/SolEval/refs/heads/master/repository.zip)
 
+After extraction, you should have `SolEval/repository`. This folder contains **28** subfolders (each corresponding to a GitHub project). **Do not modify any internal file structures**, or the evaluation scripts may fail.
 
 ## Precheck
 
-Before running the evaluation, ensure that you have installed the following tools:
+### Install Foundry (forge)
 
-### How to install Forge
-Precompiled binaries can be downloaded from the [GitHub releases page](https://github.com/foundry-rs/foundry/releases). 
+Install from the [Foundry releases page](https://github.com/foundry-rs/foundry/releases) (or via the official install script).
 
+### Install Slither
 
-### How to install Slither
-> **Note** <br />
-> Slither requires Python 3.8+.
-If you're **not** going to use one of the [supported compilation frameworks](https://github.com/crytic/crytic-compile), you need [solc](https://github.com/ethereum/solidity/), the Solidity compiler; we recommend using [solc-select](https://github.com/crytic/solc-select) to conveniently switch between solc versions.
+> **Note**
+> Slither requires Python 3.8+. If you’re **not** using a [supported compilation framework](https://github.com/crytic/crytic-compile), you’ll need the Solidity compiler `solc`; we recommend managing versions with [solc-select](https://github.com/crytic/solc-select).
 
-```console
+```bash
 python3 -m pip install slither-analyzer
 ```
 
-## Usage
+# 🧪 Evaluation
 
-### Generating Patches with LLMs
+SolEval provides an end-to-end pipeline for **repository-aware** contract generation: patch generation → functional correctness (Pass\@k) → security (Slither) → gas (forge).
 
-You can generate patches for Solidity contracts using the `run_patch_gen.sh` script. This script calls various LLMs to generate code patches with different configurations:
+## 1) Patch Generation (LLM Reasoning)
+
+Generate repository-aware patches with various LLMs; supports RAG and few-shot configurations.
 
 ```bash
-# Example command for generating a patch with GPT-4o
+# Example: GPT-4o + RAG, 1-shot, sampling 10 candidates per requirement
 python generate_rag.py --context --model gpt-4o --shot 1 --sample 10
 
-# Uncomment and adjust the lines below for other models and configurations
+# Other configurations (uncomment and adjust as needed)
 # python generate_rag.py --context --model gpt-4o-mini --shot 3 --sample 10
 # python generate_rag.py --context --model Qwen-7B --shot 2 --sample 5
 # python generate_random.py --context --model Qwen-7B --shot 1
 # python generate_random.py --context --model OpenCode-33B --shot 2
 ```
 
-### Running Pass@k Evaluation (Functional Correctness)
+**Args:**
 
-To run tests on the generated contracts, use the `run_forge_test.sh` script. This will run tests using `forge` with different configurations for context, sample size, and whether or not to use RAG:
+* `--context`: enable repository context (e.g., RAG/retrieval).
+* `--model`: LLM name used for generation.
+* `--shot`: number of few-shot exemplars.
+* `--sample`: number of candidates per requirement.
+
+## 2) Pass\@k Evaluation (Functional Correctness)
+
+Run tests via Foundry `forge` to evaluate functional correctness of generated patches.
 
 ```bash
 python run_forge.py --context y --model DeepSeek-V3 --sample 1 --rag true --shot 1
@@ -75,15 +109,17 @@ python run_forge.py --context y --model DeepSeek-V3 --sample 1 --rag false --sho
 python run_forge.py --context n --model DeepSeek-V3 --sample 1 --rag false --shot 1
 ```
 
-The arguments are explained as follows.
-- `context`: y or n, whether to use context or not.
-- `model`: the LLM used for generating the contracts.
-- `shot`: the number of shots for prompt-based generation.
-- `sample`: the number of generated programs per requirement.
+**Args:**
 
-### Running Vulnerability Analysis with Slither
+* `context`: `y|n` to toggle repository context.
+* `model`: model used for generation.
+* `shot`: number of few-shot exemplars.
+* `sample`: number of candidates per requirement.
+* `rag`: whether to enable RAG.
 
-You can run vulnerability checks using Slither with the `run_slither.sh` script. This will analyze the Solidity contract for potential security vulnerabilities. The script takes in a verifier file generated from the second step and runs the analysis:
+## 3) Vulnerability Analysis (Slither)
+
+Run static analysis for potential security issues using **Slither**. Requires the `verifier` file produced in the previous step.
 
 ```bash
 python run_slither.py --context y --verifier results/rag/results_OpenCode_shot_1_context_True_testcase_False_20250130_033003.jsonl --model OpenCode --sample 10 --rag true
@@ -91,54 +127,98 @@ python run_slither.py --context y --verifier results/rag/results_DeepSeek-Coder-
 python run_slither.py --context y --verifier results/rag/results_CodeLlama-34B_shot_1_context_True_testcase_False_20250201_064732.jsonl --model CodeLlama-34B --sample 10 --rag true
 ```
 
-The arguments are explained as follows.
-- `context`: y or n, whether to use context or not.
-- `model`: the LLM used for generating the contracts.
-- `verifier`: the verifier file generated from the `Running Pass@k Evaluation` step.
-- `sample`: the number of generated programs per requirement.
-- `rag`: whether to use RAG or not.
+**Args:**
 
+* `context`: `y|n` for repository context.
+* `model`: generation model.
+* `verifier`: path to the `.jsonl` verifier from the “Pass\@k Evaluation” step.
+* `sample`: candidates per requirement.
+* `rag`: whether to enable RAG.
 
-### Running Gas Analysis with forge
+## 4) Gas Analysis (forge)
 
-You can run gas analysis using forge with the `tools/run_gas.py` script. First, you need to put all the `results_*.jsonl` in the `results/gas` folder. Then, you can run the following command SEQUENTIALLY:
+Compute gas metrics using `forge`. First, place all `results_*.jsonl` under `results/gas`, then run **in order**:
 
 ```bash
 python tools/utils/intersect_gas.py
 python tools/run_gas.py --context y --model OpenCode --sample 10 --rag true --shot 1
-#python tools/run_gas.py --context y --model DeepSeek-Coder-33B --sample 10 --rag true --shot 1
-#python tools/run_gas.py --context y --model CodeLlama-34B --sample 10 --rag true --shot 1
+# python tools/run_gas.py --context y --model DeepSeek-Coder-33B --sample 10 --rag true --shot 1
+# python tools/run_gas.py --context y --model CodeLlama-34B --sample 10 --rag true --shot 1
 ```
 
-The arguments are explained as follows.
-- `context`: y or n, whether to use context or not.
-- `model`: the LLM used for generating the contracts.
-- `shot`: the number of shots.
-- `sample`: the number of generated programs per requirement.
-- `rag`: whether to use RAG or not.
+**Args:**
 
-## Contributing
+* `context`: `y|n`.
+* `model`: model name.
+* `shot`: number of few-shot exemplars.
+* `sample`: candidates per requirement.
+* `rag`: whether to enable RAG.
 
-We welcome contributions to SolEval. To contribute:
+> Outputs for functional correctness, security, and gas are written to `results/` (or to the directory specified by your scripts).
+
+# ❓ Common Issues Checklist
+
+Before opening an issue, please verify:
+
+* [ ] `repository/` directory matches the provided originals (no internal paths/files altered).
+* [ ] **Foundry**, `solc`/`solc-select`, and **Slither** are installed and callable from your shell.
+* [ ] Python deps installed: `pip install -r requirements.txt`.
+* [ ] Script parameters (`--model`/`--shot`/`--sample`/`--context`/`--rag`) match your expected setup.
+* [ ] `verifier` path (for Slither) comes from the real output of the Pass\@k step.
+* [ ] For gas analysis, `results_*.jsonl` are in `results/gas` and scripts executed in order.
+
+# 👋 Overview
+
+**SolEval** is an evaluation framework for **repository-aware** Solidity contract generation, targeting end-to-end development capabilities and engineering utility under realistic repository context. The framework covers patch generation, functional correctness (Pass\@k), security (Slither), and gas evaluation, and supports RAG and few-shot configurations for reproducible, apples-to-apples comparisons across LLMs/agents.
+
+## Structure
+
+* **Datasets / Repositories**: 9 real GitHub projects (original structure preserved).
+* **Generation**: Multi-model, multi-sample patch generation with optional RAG/few-shot.
+* **Testing**: Functional correctness via Foundry `forge` (Pass\@k).
+* **Security**: Static analysis via Slither.
+* **Gas**: Gas metrics via `forge`.
+* **Artifacts**: Unified `results/*.jsonl` outputs for analysis and reproducibility.
+
+
+# 🖊 Citation
+
+```bibtex
+@article{peng2025soleval,
+  title={SolEval: Benchmarking Large Language Models for Repository-level Solidity Code Generation},
+  author={Peng, Zhiyuan and Yin, Xin and Qian, Rui and Lin, Peiqin and Liu, Yongkang and Ying, Chenhao and Luo, Yuan},
+  journal={arXiv preprint arXiv:2502.18793},
+  year={2025}
+}
+```
+
+# ❗ Known Issues
+
+- [ ] Some repositories require specific `solc` versions; align with `solc-select` before running evaluations.
+- [ ] On Windows, certain dependency installers may require Administrator privileges.
+
+# ☘ Feature in Future
+
+- [ ] Public leaderboard and full evaluation report.
+- [ ] More real repositories and test cases.
+- [ ] Additional languages/frameworks (e.g., Vyper / Hardhat).
+
+# 🤝 Contributing
+
+Contributions are welcome!
 
 1. Fork this repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a new Pull Request.
+2. Create a new branch: `git checkout -b feature-branch`
+3. Commit changes: `git commit -am 'Add new feature'`
+4. Push: `git push origin feature-branch`
+5. Open a Pull Request.
 
-Please ensure your code adheres to the existing coding standards and includes appropriate tests.
+Please follow the existing code style and include appropriate tests.
 
-## License
+# 📄 License
 
-SolEval is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Released under the **MIT License**. See [LICENSE](LICENSE) for details.
 
-## Acknowledgements
+# 🙏 Acknowledgements
 
-SolEval is developed as part of our submission for EMNLP2025.
-
-We acknowledge the contributions of the open-source community and the developers of the tools integrated into SolEval.
-
-## Contact
-
-For questions or feedback, please open an issue on this repository.
+This repository accompanies our EMNLP 2025 Main paper. We thank the open-source community and the authors of tools used here (Foundry, Slither, `solc`, etc.).
