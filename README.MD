@@ -75,7 +75,7 @@ SolEval/
 ├── run_patch_gen.sh
 ├── run_slither.sh
 └── tools/
-</details> ```
+</details>
 
 
 ## Precheck
