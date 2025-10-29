@@ -33,10 +33,10 @@
 
 ## Requirements
 
-* **Operating System**: Linux / Windows (macOS not thoroughly tested but likely works).
+* **Operating System**: Linux / Windows / WSL2 on win11 / macOS (not thoroughly tested but likely works for linux-like architecture).
 * **Python**: 3.8+ (3.10/3.11 recommended).
-* **Solidity toolchain**: Foundry (**forge**) and `solc` (use `solc-select` to manage versions).
-* **Security analyzer**: **Slither** (Python 3.8+).
+* **Solidity toolchain**: Foundry (**forge**).
+* **Security analyzer**: Slither (Python 3.8+).
 * *(Optional)* **LLMs**: GPT-4o, DeepSeek, Qwen, CodeLlama, OpenCode, etc.
 
 ## Installation
@@ -193,7 +193,7 @@ Before opening an issue, please verify:
 
 ## Structure
 
-* **Datasets / Repositories**: 9 real GitHub projects (original structure preserved).
+* **Datasets / Repositories**: 28 real GitHub projects (original structure preserved).
 * **Generation**: Multi-model, multi-sample patch generation with optional RAG/few-shot.
 * **Testing**: Functional correctness via Foundry `forge` (Pass\@k).
 * **Security**: Static analysis via Slither.
@@ -241,4 +241,4 @@ Released under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 # 🙏 Acknowledgements
 
-This repository accompanies our EMNLP 2025 Main paper. We thank the open-source community and the authors of tools used here (Foundry, Slither, `solc`, etc.).
+This repository accompanies our EMNLP 2025 Main paper. We thank the open-source community and the authors of tools used here (Foundry, Slither, etc.).
