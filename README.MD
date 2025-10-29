@@ -59,9 +59,9 @@ After extraction, you should have `SolEval/repository`. This folder contains **2
 
 ## Precheck
 
-### Install Foundry (forge)
+### Install Foundry (forge 0.2.0 2024-12-08 version)
 
-Install from the [Foundry releases page](https://github.com/foundry-rs/foundry/releases) (or via the official install script).
+Install from the [Foundry releases page](https://github.com/foundry-rs/foundry/releases) (or via the official install script). Note that using newer version will cause inconsistent behaviors.
 
 ### Install Slither
 
