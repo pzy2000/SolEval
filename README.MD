@@ -55,7 +55,21 @@ Download the original repositories and extract them under the project root:
 
 * Download: [repository.zip](https://media.githubusercontent.com/media/pzy2000/SolEval/refs/heads/master/repository.zip)
 
-After extraction, you should have `SolEval/repository`. This folder contains **28** subfolders (each corresponding to a GitHub project). **Do not modify any internal file structures**, or the evaluation scripts may fail.
+After extraction, you should have `SolEval/repository`. This folder contains **28** subfolders (each corresponding to a GitHub project). **Do not modify any internal file structures**, or the evaluation scripts may fail. The file structure should look like this after extraction:
+.
+├── LICENSE
+├── README.MD
+├── data
+├── environment.txt
+├── forge
+├── libtree-sitter-solidity.so
+├── prebuilt
+├── repository
+├── requirement.txt
+├── run_forge_test.sh
+├── run_patch_gen.sh
+├── run_slither.sh
+└── tools
 
 ## Precheck
 
