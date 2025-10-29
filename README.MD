@@ -57,7 +57,9 @@ Download the original repositories and extract them under the project root:
 
 After extraction, you should have `SolEval/repository`. This folder contains **28** subfolders (each corresponding to a GitHub project). **Do not modify any internal file structures**, or the evaluation scripts may fail. The file structure should look like this after extraction:
 
-#### File Structure
+<details>
+<summary><strong>File Structure (click to expand)</strong></summary>
+
 ```text
 SolEval/
 ├── LICENSE
@@ -67,12 +69,13 @@ SolEval/
 ├── forge/
 ├── libtree-sitter-solidity.so
 ├── prebuilt/
-├── repository/
+├── repository/        # contains 28 subfolders (GitHub projects)
 ├── requirement.txt
 ├── run_forge_test.sh
 ├── run_patch_gen.sh
 ├── run_slither.sh
 └── tools/
+</details> ```
 
 ## Precheck
 
