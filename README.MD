@@ -33,7 +33,7 @@
 
 ## Requirements
 
-* **Operating System**: Linux / Windows / WSL2 on win11 / macOS (not thoroughly tested but likely works for linux-like architecture).
+* **Operating System**: Linux / WSL2 on win11 / Windows / macOS (not thoroughly tested).
 * **Python**: 3.8+ (3.10/3.11 recommended).
 * **Solidity toolchain**: Foundry (**forge**).
 * **Security analyzer**: Slither (Python 3.8+).
