@@ -23,6 +23,19 @@
 
 📫 Contact: [Zhiyuan Peng](mailto:pzy2000@sjtu.edu.cn), [Xin Yin](mailto:xyin@zju.edu.cn)
 
+# 👋 Overview
+
+**SolEval** is an evaluation framework for **repository-aware** Solidity contract generation, targeting end-to-end development capabilities and engineering utility under realistic repository context. The framework covers patch generation, functional correctness (Pass\@k), security (Slither), and gas evaluation, and supports RAG and few-shot configurations for reproducible, apples-to-apples comparisons across LLMs/agents.
+
+## Structure
+
+* **Datasets / Repositories**: 28 real GitHub projects (original structure preserved).
+* **Generation**: Multi-model, multi-sample patch generation with optional RAG/few-shot.
+* **Testing**: Functional correctness via Foundry `forge` (Pass\@k).
+* **Security**: Static analysis via Slither.
+* **Gas**: Gas metrics via `forge`.
+* **Artifacts**: Unified `results/*.jsonl` outputs for analysis and reproducibility.
+
 # 📰 News
 
 * \<2025/02> 🚀 SolEval repository open-sourced.
@@ -186,20 +199,6 @@ Before opening an issue, please verify:
 * [ ] Script parameters (`--model`/`--shot`/`--sample`/`--context`/`--rag`) match your expected setup.
 * [ ] `verifier` path (for Slither) comes from the real output of the Pass\@k step.
 * [ ] For gas analysis, `results_*.jsonl` are in `results/gas` and scripts executed in order.
-
-# 👋 Overview
-
-**SolEval** is an evaluation framework for **repository-aware** Solidity contract generation, targeting end-to-end development capabilities and engineering utility under realistic repository context. The framework covers patch generation, functional correctness (Pass\@k), security (Slither), and gas evaluation, and supports RAG and few-shot configurations for reproducible, apples-to-apples comparisons across LLMs/agents.
-
-## Structure
-
-* **Datasets / Repositories**: 28 real GitHub projects (original structure preserved).
-* **Generation**: Multi-model, multi-sample patch generation with optional RAG/few-shot.
-* **Testing**: Functional correctness via Foundry `forge` (Pass\@k).
-* **Security**: Static analysis via Slither.
-* **Gas**: Gas metrics via `forge`.
-* **Artifacts**: Unified `results/*.jsonl` outputs for analysis and reproducibility.
-
 
 # 🖊 Citation
 
